@@ -32,7 +32,7 @@ Holographic Reduced Representations (HRR) is a method of representing compositio
 </p>
 
 ## Docs :green_book: 
-HRR library supports <a href="https://www.tensorflow.org">TensorFlow</a>, <a href="https://pytorch.org">PyTorch</a>, <a href="https://github.com/google/jax">JAX</a>, and <a href="https://github.com/google/flax">Flax</a>. To import the HRR package with the TensorFlow backend use ```HRR.with_tensorflow```, to import with the JAX backend use ```HRR.with_jax```, and so on. Vectors are sampled from a normal distribution with zero mean and the variance of the inverse of the dimension using ```normal``` function, with ```projection``` onto the ball of complex unit magnitude, to enforce that the inverse will be numerically stable during unbinding, proposed in [Learning with Holographic Reduced Representations](https://arxiv.org/pdf/2109.02157.pdf).
+HRR library supports <a href="https://www.tensorflow.org">TensorFlow</a>, <a href="https://pytorch.org">PyTorch</a>, <a href="https://github.com/google/jax">JAX</a>, and <a href="https://github.com/google/flax">Flax</a>. To import the HRR package with the TensorFlow backend use ```HRR.with_tensorflow```, to import with the JAX backend use ```HRR.with_jax```, and so on. Vectors are sampled from a normal distribution with zero mean and the variance of the inverse of the dimension using ```normal``` function, with ```projection``` onto the ball of complex unit magnitude, to enforce that the inverse will be numerically stable during unbinding, proposed in [Learning with Holographic Reduced Representations](https://arxiv.org/abs/2109.02157).
 
 ```python 
 from HRR.with_pytorch import normal, projection, binding, unbinding, cosine_similarity
@@ -127,7 +127,7 @@ print(f'score: {score[0]:.2f}')
 ```
 
 ## Papers :scroll:
-[Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations @ ICML 2022](http://arxiv.org/abs/2206.05893)
+[```Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations @ ICML 2022```](http://arxiv.org/abs/2206.05893) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Connectionist-Symbolic-Pseudo-Secrets)
 
 ```bibtex 
 @inproceedings{Alam2022,
