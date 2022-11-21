@@ -29,10 +29,10 @@ pip install hrr
 pip install git+https://github.com/MahmudulAlam/Holographic-Reduced-Representations.git
 ``` -->
 
-## Update :seedling:
+## Update :hammer_and_wrench:
 
 - v1.1.0 - ```dim/axis``` support for PyTorch, JAX & Flax
-- For TensorFlow by default binding/unbinding is applied to the last dimension
+- For TensorFlow binding/unbinding can only be applied to the last dimension
 
 ## Intro :studio_microphone:
 
@@ -157,6 +157,14 @@ print(f'Total time: {toc - tic:.4f}s')
 # Total time: 0.0088s
 ```
 
+## Processing :framed_picture:
+
+```apply.py``` shows an example of how to apply binding/unbinding to an image. The bound image is the composite representation of the original image and another matrix sampled from a normal distribution performed by the ```binding``` operation. By using the ```unbinding``` operation original image can be retrieved without any loss. 
+
+<p align="center">
+  <img src="figs/viz.jpg" height="200">
+</p>
+
 ## Papers :scroll:
 
 [```Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations @ ICML 2022```](http://arxiv.org/abs/2206.05893) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Connectionist-Symbolic-Pseudo-Secrets)
@@ -177,6 +185,7 @@ print(f'Total time: {toc - tic:.4f}s')
 ## Report 🐛🚩🚧📢
 
 To report a bug or any other questions, please feel free to open an issue.
+
 
 ## Thanks :blossom:
 
