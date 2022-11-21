@@ -1,36 +1,46 @@
 import jax
 import time
 import jax.numpy as np
+import flax.linen as nn
 from HRR.with_flax import normal
 from HRR.with_flax import Projection, Binding, Unbinding, CosineSimilarity
 
 np.set_printoptions(precision=4, suppress=True)
 
 batch = 32
-features = 256
+features = 1024
 
 x = normal(shape=(batch, features), seed=0)
 y = normal(shape=(batch, features), seed=1)
 
-projection = Projection()
-binding = Binding()
-unbinding = Unbinding()
-similarity = CosineSimilarity()
 
-# create empty frozen dict as parameter less variable
-var = projection.init(jax.random.PRNGKey(0), np.ones((batch, features)))
+class Model(nn.Module):
+    def setup(self):
+        self.binding = Binding()
+        self.unbinding = Unbinding()
+        self.projection = Projection()
+        self.similarity = CosineSimilarity()
+
+    @nn.compact
+    def __call__(self, x, y, axis):
+        x = self.projection(x, axis=axis)
+        y = self.projection(y, axis=axis)
+
+        b = self.binding(x, y, axis=axis)
+        y_ = self.unbinding(b, x, axis=axis)
+
+        return self.similarity(y, y_, axis=axis, keepdims=False)
+
+
+model = Model()
+init_value = {'x': np.ones_like(x), 'y': np.ones_like(y), 'axis': -1}
+var = model.init(jax.random.PRNGKey(0), **init_value)
 
 tic = time.time()
-x = projection.apply(var, x)
-y = projection.apply(var, y)
-
-b = binding.apply(var, x, y)
-y_ = unbinding.apply(var, b, x)
-
-score = similarity.apply(var, y, y_)
+inputs = {'x': x, 'y': y, 'axis': -1}
+score = model.apply(var, **inputs)
 toc = time.time()
 
-print('y:', y[0])
-print('y_prime:', y_[0])
+print(score)
 print(f'score: {score[0]:.2f}')
 print(f'Total time: {toc - tic:.4f}s')

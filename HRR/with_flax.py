@@ -5,21 +5,21 @@ import flax.linen as nn
 
 class FFT(nn.Module):
     @nn.compact
-    def __call__(self, x):
-        return np.fft.fft(x)
+    def __call__(self, x, axis):
+        return np.fft.fft(x, axis=axis)
 
 
 class IFFT(nn.Module):
     @nn.compact
-    def __call__(self, x):
-        return np.fft.ifft(x)
+    def __call__(self, x, axis):
+        return np.fft.ifft(x, axis=axis)
 
 
 class ApproxInverse(nn.Module):
     @nn.compact
-    def __call__(self, x):
-        x = np.flip(x, axis=-1)
-        return np.roll(x, 1, axis=-1)
+    def __call__(self, x, axis):
+        x = np.flip(x, axis=axis)
+        return np.roll(x, 1, axis=axis)
 
 
 class Projection(nn.Module):
@@ -28,9 +28,9 @@ class Projection(nn.Module):
         self.ifft = IFFT()
 
     @nn.compact
-    def __call__(self, x):
-        f = np.abs(self.fft(x))
-        p = np.real(self.ifft(self.fft(x) / f))
+    def __call__(self, x, axis):
+        f = self.fft(x, axis=axis)
+        p = np.real(self.ifft(f / np.abs(f), axis=axis))
         return np.nan_to_num(p)
 
 
@@ -40,8 +40,8 @@ class Binding(nn.Module):
         self.ifft = IFFT()
 
     @nn.compact
-    def __call__(self, x, y):
-        b = self.ifft(self.fft(x) * self.fft(y))
+    def __call__(self, x, y, axis):
+        b = self.ifft(self.fft(x, axis=axis) * self.fft(y, axis=axis), axis=axis)
         return np.real(b)
 
 
@@ -51,9 +51,9 @@ class Unbinding(nn.Module):
         self.binding = Binding()
 
     @nn.compact
-    def __call__(self, b, y):
-        yt = self.approx_inverse(y)
-        return self.binding(b, yt)
+    def __call__(self, b, y, axis):
+        yt = self.approx_inverse(y, axis=axis)
+        return self.binding(b, yt, axis=axis)
 
 
 class CosineSimilarity(nn.Module):

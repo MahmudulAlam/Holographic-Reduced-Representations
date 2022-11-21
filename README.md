@@ -1,4 +1,5 @@
 ## Holographic Reduced Representations 🔥
+
 [![GitHub issues](https://img.shields.io/github/issues/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/issues)
 [![GitHub forks](https://img.shields.io/github/forks/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/network)
 [![GitHub stars](https://img.shields.io/github/stars/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/stargazers)
@@ -18,21 +19,36 @@
 </p>
 
 ## Install 🎉
+
 ```
 pip install hrr
 ```
+
 <!-- <b>else</b>
 ``` 
 pip install git+https://github.com/MahmudulAlam/Holographic-Reduced-Representations.git
 ``` -->
 
+## Update :seedling:
+
+- v1.0.1 - ```dim/axis``` support for PyTorch, JAX & Flax
+- For TensorFlow by default binding/unbinding is applied to the last dimension
+
 ## Intro :studio_microphone:
+
 <p align="justify">
 Holographic Reduced Representations (HRR) is a method of representing compositional structures using circular convolution in distributed representations. The HRR operations <em>binding</em> and <em>unbinding</em> allow assigning abstract concepts to arbitrary numerical vectors. Given vectors x and y in a d-dimensional space, both can be combined using binding operation. Likewise, one of the vectors can be retrieved knowing one of the two vectors using unbinding operation.
 </p>
 
-## Docs :green_book: 
-HRR library supports <a href="https://www.tensorflow.org">TensorFlow</a>, <a href="https://pytorch.org">PyTorch</a>, <a href="https://github.com/google/jax">JAX</a>, and <a href="https://github.com/google/flax">Flax</a>. To import the HRR package with the TensorFlow backend use ```HRR.with_tensorflow```, to import with the JAX backend use ```HRR.with_jax```, and so on. Vectors are sampled from a normal distribution with zero mean and the variance of the inverse of the dimension using ```normal``` function, with ```projection``` onto the ball of complex unit magnitude, to enforce that the inverse will be numerically stable during unbinding, proposed in [Learning with Holographic Reduced Representations](https://arxiv.org/abs/2109.02157).
+## Docs :green_book:
+
+HRR library supports <a href="https://www.tensorflow.org">TensorFlow</a>, <a href="https://pytorch.org">PyTorch</a>
+, <a href="https://github.com/google/jax">JAX</a>, and <a href="https://github.com/google/flax">Flax</a>. To import the
+HRR package with the TensorFlow backend use ```HRR.with_tensorflow```, to import with the JAX backend
+use ```HRR.with_jax```, and so on. Vectors are sampled from a normal distribution with zero mean and the variance of the
+inverse of the dimension using ```normal``` function, with ```projection``` onto the ball of complex unit magnitude, to
+enforce that the inverse will be numerically stable during unbinding, proposed
+in [Learning with Holographic Reduced Representations](https://arxiv.org/abs/2109.02157).
 
 ```python 
 from HRR.with_pytorch import normal, projection, binding, unbinding, cosine_similarity
@@ -41,11 +57,11 @@ from HRR.with_pytorch import normal, projection, binding, unbinding, cosine_simi
 batch = 32
 features = 256
 
-x = projection(normal(shape=(batch, features), seed=0))
-y = projection(normal(shape=(batch, features), seed=1))
+x = projection(normal(shape=(batch, features), seed=0), dim=-1)
+y = projection(normal(shape=(batch, features), seed=1), dim=-1)
 
-b = binding(x, y)
-y_prime = unbinding(b, x)
+b = binding(x, y, dim=-1)
+y_prime = unbinding(b, x, dim=-1)
 
 score = cosine_similarity(y, y_prime, dim=-1, keepdim=False)
 print('score:', score[0])
@@ -56,20 +72,20 @@ What makes HRR more interesting is that multiple vectors can be combined by elem
 however, retrieval accuracy will decrease.
 
 ```python
-x = projection(normal(shape=(batch, features), seed=0))
-y = projection(normal(shape=(batch, features), seed=1))
-w = projection(normal(shape=(batch, features), seed=2))
-z = projection(normal(shape=(batch, features), seed=3))
+x = projection(normal(shape=(batch, features), seed=0), dim=-1)
+y = projection(normal(shape=(batch, features), seed=1), dim=-1)
+w = projection(normal(shape=(batch, features), seed=2), dim=-1)
+z = projection(normal(shape=(batch, features), seed=3), dim=-1)
 
-b = binding(x, y) + binding(w, z)
-y_prime = unbinding(b, x)
+b = binding(x, y, dim=-1) + binding(w, z, dim=-1)
+y_prime = unbinding(b, x, dim=-1)
 
 score = cosine_similarity(y, y_prime, dim=-1, keepdim=False)
 print('score:', score[0])
 # prints score: tensor(0.7483)
 ```
 
-More interestingly, vectors can be combined and retrieved in hierarchical order. 🌳 
+More interestingly, vectors can be combined and retrieved in hierarchical order. 🌳
 
 ```
 x    y
@@ -82,51 +98,67 @@ b=x#y  z
 ```
 
 ```python 
-x = projection(normal(shape=(batch, features), seed=0))
-y = projection(normal(shape=(batch, features), seed=1))
-z = projection(normal(shape=(batch, features), seed=2))
+x = projection(normal(shape=(batch, features), seed=0), dim=-1)
+y = projection(normal(shape=(batch, features), seed=1), dim=-1)
+z = projection(normal(shape=(batch, features), seed=2), dim=-1)
 
-b = binding(x, y)
-c = binding(b, z)
+b = binding(x, y, dim=-1)
+c = binding(b, z, dim=-1)
 
-b_ = unbinding(c, z)
-y_ = unbinding(b_, x)
+b_ = unbinding(c, z, dim=-1)
+y_ = unbinding(b_, x, dim=-1)
 
 score = cosine_similarity(y, y_, dim=-1)
 print('score:', score[0])
 # prints score: tensor(1.0000)
 ```
 
-## Flax Module (Fastest) ⚡ 
-HRR package supports vector binding/unbinding as a Flax module. Like any other Flax module, this needs to be initialized first and then execute using the apply method.
+## Flax Module (Fastest) ⚡
+
+HRR package supports vector binding/unbinding as a Flax module. Like any other Flax module, this needs to be initialized
+first and then execute using the apply method.
 
 ```python
-from HRR.with_flax import normal, Projection, Binding, Unbinding, CosineSimilarity
-
-
 x = normal(shape=(batch, features), seed=0)
 y = normal(shape=(batch, features), seed=1)
 
-projection = Projection()
-binding = Binding()
-unbinding = Unbinding()
-similarity = CosineSimilarity()
 
-# create empty frozen dict as parameter less variable
-var = projection.init(jax.random.PRNGKey(0), np.ones((batch, features)))
+class Model(nn.Module):
+    def setup(self):
+        self.binding = Binding()
+        self.unbinding = Unbinding()
+        self.projection = Projection()
+        self.similarity = CosineSimilarity()
 
-x = projection.apply(var, x)
-y = projection.apply(var, y)
+    @nn.compact
+    def __call__(self, x, y, axis):
+        x = self.projection(x, axis=axis)
+        y = self.projection(y, axis=axis)
 
-b = binding.apply(var, x, y)
-y_ = unbinding.apply(var, b, x)
+        b = self.binding(x, y, axis=axis)
+        y_ = self.unbinding(b, x, axis=axis)
 
-score = similarity.apply(var, y, y_)
+        return self.similarity(y, y_, axis=axis, keepdims=False)
+
+
+model = Model()
+init_value = {'x': np.ones_like(x), 'y': np.ones_like(y), 'axis': -1}
+var = model.init(jax.random.PRNGKey(0), **init_value)
+
+tic = time.time()
+inputs = {'x': x, 'y': y, 'axis': -1}
+score = model.apply(var, **inputs)
+toc = time.time()
+
+print(score)
 print(f'score: {score[0]:.2f}')
+print(f'Total time: {toc - tic:.4f}s')
 # prints score: 1.00
+# Total time: 0.0088s
 ```
 
 ## Papers :scroll:
+
 [```Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations @ ICML 2022```](http://arxiv.org/abs/2206.05893) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Connectionist-Symbolic-Pseudo-Secrets)
 
 ```bibtex 
@@ -143,7 +175,13 @@ print(f'score: {score[0]:.2f}')
 ``` 
 
 ## Report 🐛🚩🚧📢
+
 To report a bug or any other questions, please feel free to open an issue.
 
-## Hat Tip :tophat:
-Thanks to [@EdwardRaffML](https://twitter.com/EdwardRaffML) and [@oatesbag](https://twitter.com/oatesbag) for their constant support in this research endeavor.
+## Thanks :blossom:
+
+Thanks
+to [![Twitter](https://img.shields.io/twitter/url?label=@EdwardRaffML&style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/EdwardRaffML)
+and
+[![Twitter](https://img.shields.io/twitter/url?label=@oatesbag&style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/oatesbag)
+for their constant support in this research endeavor.

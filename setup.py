@@ -12,6 +12,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setuptools.setup(name='hrr',
                  version=version,
                  author='Mohammad Mahmudul Alam',
+                 license='MIT',
                  description='Holographic Reduced Representations',
                  long_description=long_description,
                  long_description_content_type='text/markdown',
@@ -21,5 +22,7 @@ setuptools.setup(name='hrr',
                  ],
                  packages=setuptools.find_packages(),
                  install_requires=[],
-                 python_requires='>=3.7',
+                 python_requires='>=3.6',
                  )
+
+print('Documentation: https://github.com/MahmudulAlam/Holographic-Reduced-Representations')
