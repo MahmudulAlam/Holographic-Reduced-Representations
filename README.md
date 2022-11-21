@@ -4,7 +4,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/network)
 [![GitHub stars](https://img.shields.io/github/stars/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/stargazers)
 [![GitHub license](https://img.shields.io/github/license/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/blob/main/LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.1-f56207.svg?longCache=true&style=flat)]()
+[![Version](https://img.shields.io/badge/version-1.1.0-f56207.svg?longCache=true&style=flat)]()
 [![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2FMahmudulAlam%2FHolographic-Reduced-Representations%2F)
 
 <p align="center"><b><em>Supports</em></b></p> 
@@ -31,7 +31,7 @@ pip install git+https://github.com/MahmudulAlam/Holographic-Reduced-Representati
 
 ## Update :seedling:
 
-- v1.0.1 - ```dim/axis``` support for PyTorch, JAX & Flax
+- v1.1.0 - ```dim/axis``` support for PyTorch, JAX & Flax
 - For TensorFlow by default binding/unbinding is applied to the last dimension
 
 ## Intro :studio_microphone:
