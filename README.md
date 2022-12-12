@@ -1,4 +1,4 @@
-## Holographic Reduced Representations 🔥
+<h2 align="center">Holographic Reduced Representations</h2>
 
 [![GitHub issues](https://img.shields.io/github/issues/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/issues)
 [![GitHub forks](https://img.shields.io/github/forks/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/network)
@@ -182,15 +182,10 @@ print(f'Total time: {toc - tic:.4f}s')
 }
 ``` 
 
-## Report 🐛🚩🚧📢
+## Report 🐛🚧🚩
 
 To report a bug or any other questions, please feel free to open an issue.
 
 
-## Thanks :blossom:
-
-Thanks
-to [![Twitter](https://img.shields.io/twitter/url?label=@EdwardRaffML&style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/EdwardRaffML)
-and
-[![Twitter](https://img.shields.io/twitter/url?label=@oatesbag&style=social&url=https%3A%2F%2Ftwitter.com%2F)](https://twitter.com/oatesbag)
-for their constant support in this research endeavor.
+<h2 align="center">Thanks🌼</h2>
+<p align="center">Thanks to <a href="https://twitter.com/EdwardRaffML" target="_blank"><img src="https://user-images.githubusercontent.com/37298971/206940177-a9661598-18a2-4534-ade9-2c517da7b8f7.png" height="14">@EdwardRaffML</a> and <a href="https://twitter.com/oatesbag" target="_blank"><img src="https://user-images.githubusercontent.com/37298971/206940177-a9661598-18a2-4534-ade9-2c517da7b8f7.png" height="14">@oatesbag</a> for their constant support to this research endeavor.</p>
