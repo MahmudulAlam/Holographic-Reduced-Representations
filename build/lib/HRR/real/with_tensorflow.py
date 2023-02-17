@@ -1,4 +1,7 @@
 import tensorflow as tf
+from warnings import warn
+
+warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 """
 Note: In TensorFlow, all fft operations will be applied to last dimension. 
@@ -6,23 +9,19 @@ Note: In TensorFlow, all fft operations will be applied to last dimension.
 
 
 def fft(x):
-    if x.dtype != 'complex64':
-        x = tf.cast(x, tf.complex64)
-    return tf.signal.fft(x)
+    return tf.signal.rfft(x)
 
 
 def ifft(x):
-    if x.dtype != 'complex64':
-        x = tf.cast(x, tf.complex64)
-    return tf.signal.ifft(x)
+    return tf.signal.irfft(x)
 
 
 def fft_2d(x):
-    return tf.signal.fft2d(x)
+    return tf.signal.rfft2d(x)
 
 
 def ifft_2d(x):
-    return tf.signal.ifft2d(x)
+    return tf.signal.irfft2d(x)
 
 
 def approx_inverse(x):
@@ -37,15 +36,13 @@ def inverse_2d(x):
 
 def projection(x):
     fx = fft(x)
-    p = ifft(fx / tf.cast(tf.abs(fx), tf.complex64))
-    p = tf.cast(p, tf.float32)
+    p = ifft(fx / tf.cast(tf.abs(fx), dtype=tf.complex64))
     return tf.where(tf.math.is_nan(p), 0., p)
 
 
 def projection_2d(x):
     fx = fft_2d(x)
     p = ifft_2d(fx / tf.cast(tf.abs(fx), dtype=tf.complex64))
-    p = tf.cast(p, tf.float32)
     return tf.where(tf.math.is_nan(p), 0., p)
 
 
@@ -54,17 +51,17 @@ def binding(x, y):
 
 
 def binding_2d(x, y):
-    return tf.math.real(ifft_2d(tf.multiply(fft_2d(x), fft_2d(y))))
+    return ifft_2d(tf.multiply(fft_2d(x), fft_2d(y)))
 
 
 def unbinding(s, y):
     yt = approx_inverse(y)
-    return tf.math.real(binding(s, yt))
+    return binding(s, yt)
 
 
 def unbinding_2d(b, y):
     yt = inverse_2d(y)
-    return tf.math.real(binding_2d(b, yt))
+    return binding_2d(b, yt)
 
 
 def normal(shape, seed):
@@ -88,8 +85,8 @@ convolve1d = binding
 convolve2d = binding_2d
 
 if __name__ == '__main__':
-    x_ = normal(shape=(4, 7), seed=0)
-    y_ = normal(shape=(4, 7), seed=1)
+    x_ = normal(shape=(4, 8), seed=0)
+    y_ = normal(shape=(4, 8), seed=1)
 
     x_ = projection(x_)
     y_ = projection(y_)

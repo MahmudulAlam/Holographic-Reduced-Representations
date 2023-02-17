@@ -87,6 +87,10 @@ def cosine_similarity(x, y, dim=None, keepdim=False):
     return torch.sum(x * y, dim=dim, keepdim=keepdim) / (norm_x * norm_y)
 
 
+""" aliases """
+convolve1d = binding
+convolve2d = binding_2d
+
 if __name__ == '__main__':
     x_ = normal(shape=(2, 3, 8, 8), seed=0)
     y_ = normal(shape=(2, 3, 8, 8), seed=1)

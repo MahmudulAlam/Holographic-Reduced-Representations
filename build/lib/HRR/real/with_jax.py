@@ -1,21 +1,24 @@
 import jax
 import jax.numpy as np
+from warnings import warn
+
+warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 
 def fft(x, axis):
-    return np.fft.fft(x, axis=axis)
+    return np.fft.rfft(x, axis=axis)
 
 
 def ifft(x, axis):
-    return np.fft.ifft(x, axis=axis)
+    return np.fft.irfft(x, axis=axis)
 
 
 def fft_2d(x, axis):
-    return np.fft.fft2(x, axes=axis)
+    return np.fft.rfft2(x, axes=axis)
 
 
 def ifft_2d(x, axis):
-    return np.fft.ifft2(x, axes=axis)
+    return np.fft.irfft2(x, axes=axis)
 
 
 def approx_inverse(x, axis):
@@ -24,30 +27,28 @@ def approx_inverse(x, axis):
 
 
 def inverse_2d(x, axis):
-    x = ifft_2d(1. / fft_2d(x, axis), axis).real
+    x = ifft_2d(1. / fft_2d(x, axis), axis)
     return np.nan_to_num(x)
 
 
 def projection(x, axis):
     f = np.abs(fft(x, axis))
-    p = np.real(ifft(fft(x, axis) / f, axis))
+    p = ifft(fft(x, axis) / f, axis)
     return np.nan_to_num(p)
 
 
 def projection_2d(x, axis):
     f = np.abs(fft_2d(x, axis))
-    p = ifft_2d(fft_2d(x, axis) / f, axis).real
+    p = ifft_2d(fft_2d(x, axis) / f, axis)
     return np.nan_to_num(p)
 
 
 def binding(x, y, axis):
-    b = ifft(fft(x, axis) * fft(y, axis), axis)
-    return np.real(b)
+    return ifft(fft(x, axis) * fft(y, axis), axis)
 
 
 def binding_2d(x, y, axis):
-    b = ifft_2d(np.multiply(fft_2d(x, axis), fft_2d(y, axis)), axis)
-    return np.real(b)
+    return ifft_2d(np.multiply(fft_2d(x, axis), fft_2d(y, axis)), axis)
 
 
 def unbinding(s, y, axis):
@@ -83,8 +84,8 @@ convolve1d = binding
 convolve2d = binding_2d
 
 if __name__ == '__main__':
-    x_ = normal(shape=(2, 3, 8, 8), seed=0)
-    y_ = normal(shape=(2, 3, 8, 8), seed=1)
+    x_ = normal(shape=(2, 4, 8, 8), seed=0)
+    y_ = normal(shape=(2, 4, 8, 8), seed=1)
 
     x_ = projection(x_, axis=1)
     y_ = projection(y_, axis=1)
@@ -93,4 +94,4 @@ if __name__ == '__main__':
     yp = unbinding(bind, x_, axis=1)
 
     score = cosine_similarity(y_, yp, axis=1)
-    print(score[0][0][0])
+    print(score[0])

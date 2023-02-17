@@ -1,4 +1,4 @@
-<h2 align="center">Holographic Reduced Representations</h2>
+<h2 align="center"><a href="https://github.com/MahmudulAlam/Holographic-Reduced-Representations">Holographic Reduced Representations</a></h2>
 
 [![GitHub issues](https://img.shields.io/github/issues/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/issues)
 [![GitHub forks](https://img.shields.io/github/forks/MahmudulAlam/Holographic-Reduced-Representations)](https://github.com/MahmudulAlam/Holographic-Reduced-Representations/network)
@@ -31,6 +31,7 @@ pip install git+https://github.com/MahmudulAlam/Holographic-Reduced-Representati
 
 ## Update :hammer_and_wrench:
 
+- v1.2.0 - support for real-valued FFT, can be accessed by ```HRR.real```
 - v1.1.0 - ```dim/axis``` support for PyTorch, JAX & Flax
 - For TensorFlow binding/unbinding can only be applied to the last dimension
 

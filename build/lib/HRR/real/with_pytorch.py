@@ -1,20 +1,23 @@
 import torch
+from warnings import warn
+
+warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 
 def fft(x, dim):
-    return torch.fft.fft(x, dim=dim)
+    return torch.fft.rfft(x, dim=dim)
 
 
 def ifft(x, dim):
-    return torch.fft.ifft(x, dim=dim)
+    return torch.fft.irfft(x, dim=dim)
 
 
 def fft_2d(x, dim):
-    return torch.fft.fft2(x, dim=dim)
+    return torch.fft.rfft2(x, dim=dim)
 
 
 def ifft_2d(x, dim):
-    return torch.fft.ifft2(x, dim=dim)
+    return torch.fft.irfft2(x, dim=dim)
 
 
 def approx_inverse(x, dim):
@@ -28,30 +31,28 @@ def approx_inverse_2d(x, dim):
 
 
 def inverse_2d(x, dim):
-    x = ifft_2d(1. / fft_2d(x, dim), dim).real
+    x = ifft_2d(1. / fft_2d(x, dim), dim)
     return torch.nan_to_num(x)
 
 
 def projection(x, dim):
     f = torch.abs(fft(x, dim))
-    p = ifft(fft(x, dim) / f, dim).real
+    p = ifft(fft(x, dim) / f, dim)
     return torch.nan_to_num(p)
 
 
 def projection_2d(x, dim):
     f = torch.abs(fft_2d(x, dim))
-    p = ifft_2d(fft_2d(x, dim) / f, dim).real
+    p = ifft_2d(fft_2d(x, dim) / f, dim)
     return torch.nan_to_num(p)
 
 
 def binding(x, y, dim):
-    s = ifft(torch.multiply(fft(x, dim), fft(y, dim)), dim)
-    return s.real
+    return ifft(torch.multiply(fft(x, dim), fft(y, dim)), dim)
 
 
 def binding_2d(x, y, dim):
-    b = ifft_2d(torch.multiply(fft_2d(x, dim), fft_2d(y, dim)), dim)
-    return b.real
+    return ifft_2d(torch.multiply(fft_2d(x, dim), fft_2d(y, dim)), dim)
 
 
 def unbinding(b, y, dim):
@@ -92,15 +93,16 @@ convolve1d = binding
 convolve2d = binding_2d
 
 if __name__ == '__main__':
-    x_ = normal(shape=(2, 3, 8, 8), seed=0)
-    y_ = normal(shape=(2, 3, 8, 8), seed=1)
+    x_ = normal(shape=(7, 4, 14, 14), seed=0)
+    y_ = normal(shape=(7, 4, 14, 14), seed=1)
 
     x_ = projection(x_, dim=1)
     y_ = projection(y_, dim=1)
 
     bind = binding(x_, y_, dim=1)
     yp = unbinding(bind, x_, dim=1)
-
+    print(y_.shape)
+    print(yp.shape)
     score = cosine_similarity(y_, yp, dim=1)
 
-    print(score)
+    print(score[0])

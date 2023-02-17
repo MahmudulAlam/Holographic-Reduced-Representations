@@ -1,18 +1,21 @@
 import jax
 import jax.numpy as np
 import flax.linen as nn
+from warnings import warn
+
+warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 
 class FFT(nn.Module):
     @nn.compact
     def __call__(self, x, axis):
-        return np.fft.fft(x, axis=axis)
+        return np.fft.rfft(x, axis=axis)
 
 
 class IFFT(nn.Module):
     @nn.compact
     def __call__(self, x, axis):
-        return np.fft.ifft(x, axis=axis)
+        return np.fft.irfft(x, axis=axis)
 
 
 class ApproxInverse(nn.Module):
@@ -30,7 +33,7 @@ class Projection(nn.Module):
     @nn.compact
     def __call__(self, x, axis):
         f = self.fft(x, axis=axis)
-        p = np.real(self.ifft(f / np.abs(f), axis=axis))
+        p = self.ifft(f / np.abs(f), axis=axis)
         return np.nan_to_num(p)
 
 
@@ -41,8 +44,7 @@ class Binding(nn.Module):
 
     @nn.compact
     def __call__(self, x, y, axis):
-        b = self.ifft(self.fft(x, axis=axis) * self.fft(y, axis=axis), axis=axis)
-        return np.real(b)
+        return self.ifft(self.fft(x, axis=axis) * self.fft(y, axis=axis), axis=axis)
 
 
 class Unbinding(nn.Module):

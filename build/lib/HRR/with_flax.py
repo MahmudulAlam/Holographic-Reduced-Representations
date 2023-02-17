@@ -68,3 +68,7 @@ def normal(shape, seed=0):
     d = np.prod(np.asarray(shape[1:]))
     std = 1. / np.sqrt(d)
     return std * jax.random.normal(jax.random.PRNGKey(seed), shape, dtype=np.float32)
+
+
+""" aliases """
+Conv1d = Binding
