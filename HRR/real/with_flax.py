@@ -1,9 +1,6 @@
 import jax
 import jax.numpy as np
 import flax.linen as nn
-from warnings import warn
-
-warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 
 class FFT(nn.Module):

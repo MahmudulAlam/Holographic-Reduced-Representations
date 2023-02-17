@@ -1,7 +1,4 @@
 import torch
-from warnings import warn
-
-warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 
 def fft(x, dim):

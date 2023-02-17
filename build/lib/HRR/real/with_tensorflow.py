@@ -1,7 +1,4 @@
 import tensorflow as tf
-from warnings import warn
-
-warn('For real-valued FFT, the dimension needs to be even, and the odd dimension will be reduced to even.')
 
 """
 Note: In TensorFlow, all fft operations will be applied to last dimension. 
