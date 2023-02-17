@@ -31,7 +31,7 @@ pip install git+https://github.com/MahmudulAlam/Holographic-Reduced-Representati
 
 ## Update :hammer_and_wrench:
 
-- v1.2.0 - support for real-valued FFT, can be accessed by ```HRR.real```
+- v1.2.3 - support for real-valued FFT, can be accessed by ```HRR.real```
 - v1.1.0 - ```dim/axis``` support for PyTorch, JAX & Flax
 - For TensorFlow binding/unbinding can only be applied to the last dimension
 
