@@ -181,7 +181,18 @@ print(f'Total time: {toc - tic:.4f}s')
   url = {http://arxiv.org/abs/2206.05893},
   year = {2022}
 }
-``` 
+```
+
+[```Recasting Self-Attention with Holographic Reduced Representations @ ICML 2023```](https://arxiv.org/abs/2305.19534) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Hrrformer)
+
+```bibtex
+@article{alam2023recasting,
+  title={Recasting Self-Attention with Holographic Reduced Representations},
+  author={Alam, Mohammad Mahmudul and Raff, Edward and Biderman, Stella and Oates, Tim and Holt, James},
+  journal={arXiv preprint arXiv:2305.19534},
+  year={2023}
+}
+```
 
 ## Report 🐛🚧🚩
 
