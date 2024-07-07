@@ -160,15 +160,16 @@ print(f'Total time: {toc - tic:.4f}s')
 
 ## Processing :framed_picture:
 
-```apply.py``` shows an example of how to apply binding/unbinding to an image. The bound image is the composite representation of the original image and another matrix sampled from a normal distribution performed by the ```binding``` operation. By using the ```unbinding``` operation original image can be retrieved without any loss. 
+```apply.py``` shows an example of how to apply binding/unbinding to an image. The bound image is the composite representation of the original image and another matrix sampled from a normal distribution performed by the ```binding``` operation. Using the ```unbinding``` operation, the original image can be retrieved without any loss. 
 
 <p align="center">
   <img src="figs/viz.jpg" height="200">
 </p>
 
 ## Papers :scroll:
+[![Paper](https://img.shields.io/badge/CSPS-ICML%202022-098ae6.svg?longCache=true&style=flat)]()
 
-[```Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations @ ICML 2022```](http://arxiv.org/abs/2206.05893) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Connectionist-Symbolic-Pseudo-Secrets)
+🌱 [```Deploying Convolutional Networks on Untrusted Platforms Using 2D Holographic Reduced Representations```](http://arxiv.org/abs/2206.05893) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Connectionist-Symbolic-Pseudo-Secrets)
 
 ```bibtex 
 @inproceedings{Alam2022,
@@ -183,14 +184,46 @@ print(f'Total time: {toc - tic:.4f}s')
 }
 ```
 
-[```Recasting Self-Attention with Holographic Reduced Representations @ ICML 2023```](https://arxiv.org/abs/2305.19534) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Hrrformer)
+[![Paper](https://img.shields.io/badge/Hrrformer-ICML%202023-098ae6.svg?longCache=true&style=flat)]()
+
+🌱 [```Recasting Self-Attention with Holographic Reduced Representations```](https://arxiv.org/abs/2305.19534) [```GitHub```](https://github.com/NeuromorphicComputationResearchProgram/Hrrformer)
 
 ```bibtex
-@article{alam2023recasting,
-  title={Recasting Self-Attention with Holographic Reduced Representations},
+@inproceedings{alam2023recasting,
+  title={Recasting self-attention with holographic reduced representations},
   author={Alam, Mohammad Mahmudul and Raff, Edward and Biderman, Stella and Oates, Tim and Holt, James},
-  journal={arXiv preprint arXiv:2305.19534},
+  booktitle={International Conference on Machine Learning},
+  pages={490--507},
+  year={2023},
+  organization={PMLR}
+}
+```
+
+[![Paper](https://img.shields.io/badge/Subitizing-AAAI%20workshop%202024-098ae6.svg?longCache=true&style=flat)]()
+
+🌱 [```Towards Generalization in Subitizing with Neuro-Symbolic Loss using Holographic Reduced Representations```](https://arxiv.org/abs/2312.15310) [```GitHub```](https://github.com/MahmudulAlam/Subitizing)
+
+```bibtex
+@article{alam2023towards,
+  title={Towards generalization in subitizing with neuro-symbolic loss using holographic reduced representations},
+  author={Alam, Mohammad Mahmudul and Raff, Edward and Oates, Tim},
+  journal={arXiv preprint arXiv:2312.15310},
   year={2023}
+}
+```
+
+[![Paper](https://img.shields.io/badge/HGConv-AISTATS%202024-098ae6.svg?longCache=true&style=flat)]()
+
+🌱 [```Holographic Global Convolutional Networks for Long-Range Prediction Tasks in Malware Detection @ AISTATS 2024```](https://arxiv.org/abs/2403.17978) [```GitHub```](https://github.com/FutureComputing4AI/HGConv)
+
+```bibtex
+@inproceedings{alam2024holographic,
+  title={Holographic Global Convolutional Networks for Long-Range Prediction Tasks in Malware Detection},
+  author={Alam, Mohammad Mahmudul and Raff, Edward and Biderman, Stella R and Oates, Tim and Holt, James},
+  booktitle={International Conference on Artificial Intelligence and Statistics},
+  pages={4042--4050},
+  year={2024},
+  organization={PMLR}
 }
 ```
 
