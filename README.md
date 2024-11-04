@@ -227,6 +227,19 @@ print(f'Total time: {toc - tic:.4f}s')
 }
 ```
 
+[![Paper](https://img.shields.io/badge/HGConv-NeurIPS%202024-098ae6.svg?longCache=true&style=flat)]()
+
+🌱 [```A Walsh Hadamard Derived Linear Vector Symbolic Architecture @ NeurIPS 2024```](https://arxiv.org/abs/2410.22669) [```GitHub```](https://github.com/FutureComputing4AI/Hadamard-derived-Linear-Binding)
+
+```bibtex
+@article{alam2024walsh,
+  title={A Walsh Hadamard Derived Linear Vector Symbolic Architecture},
+  author={Alam, Mohammad Mahmudul and Oberle, Alexander and Raff, Edward and Biderman, Stella and Oates, Tim and Holt, James},
+  journal={arXiv preprint arXiv:2410.22669},
+  year={2024}
+}
+```
+
 ## Report 🐛🚧🚩
 
 To report a bug or any other questions, please feel free to open an issue.
