@@ -227,7 +227,7 @@ print(f'Total time: {toc - tic:.4f}s')
 }
 ```
 
-[![Paper](https://img.shields.io/badge/HGConv-NeurIPS%202024-098ae6.svg?longCache=true&style=flat)]()
+[![Paper](https://img.shields.io/badge/HLB-NeurIPS%202024-098ae6.svg?longCache=true&style=flat)]()
 
 🌱 [```A Walsh Hadamard Derived Linear Vector Symbolic Architecture @ NeurIPS 2024```](https://arxiv.org/abs/2410.22669) [```GitHub```](https://github.com/FutureComputing4AI/Hadamard-derived-Linear-Binding)
 
